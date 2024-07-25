@@ -1,20 +1,21 @@
-﻿using Infrastructure.Service;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Infrastructure.Logger;
-
+ 
+// عشان نحفظ الاستثناء الاكسبشن في ملف فايل
 public interface IAppLogger
-{
+{ 
     void Write(Exception? ex, string msg);
     Task WriteAsync(Exception? ex, string msg);
     Task WriteAsync(Exception? ex, HttpContext context, object result);
 }
 
-public class AppLogger : IAppLogger, ISingleton
+public class AppLogger : IAppLogger
 {
     private const string path1 = @"Files\Logger.txt";
     private const string path2 = @"Files\ExceptionLog.txt";
 
+    // سنقل ثريد
     public void Write(Exception? exception, string message)
     {
         try
@@ -32,6 +33,7 @@ public class AppLogger : IAppLogger, ISingleton
         }
     }
 
+    // مالتي ثريد
     public async Task WriteAsync(Exception? exception, string message)
     {
         try
